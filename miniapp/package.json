@@ -20,11 +20,15 @@
   },
   "devDependencies": {
     "@tarojs/cli": "^3.6.26",
-    "@types/react": "^18.3.11",
+    "@tarojs/plugin-framework-react": "^3.6.38",
+    "@tarojs/plugin-platform-weapp": "^3.6.38",
+    "@tarojs/webpack5-runner": "^3.6.38",
     "@types/node": "^22.13.1",
+    "@types/react": "^18.3.11",
+    "babel-preset-taro": "^3.6.38",
     "eslint": "^9.15.0",
     "eslint-config-taro": "^3.6.26",
-    "typescript": "^5.7.3",
-    "prettier": "^3.3.3"
+    "prettier": "^3.3.3",
+    "typescript": "^5.7.3"
   }
 }
