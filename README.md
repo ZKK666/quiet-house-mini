@@ -60,12 +60,19 @@ npm test
 - `miniapp/src/pages/about-model`：噪音模型说明静态页。
 - `miniapp/src/services`：封装请求与接口调用。
 - `miniapp/src/store`：Zustand 状态（城市与筛选偏好）。
+- `miniapp/UIDesign.md`：UI 视觉与交互规范（色板、圆角、地图提示、胶囊标签样式）。
 
 ### 本地运行（推荐微信开发者工具）
 1. 在本仓库根目录启动 Mock 后端：`npm install && npm run start`。
 2. 进入 `miniapp`：`cd miniapp && npm install`（首次安装 Taro 依赖可能较慢）。
 3. 启动微信端编译：`npm run dev:weapp`，或直接用微信开发者工具打开 `miniapp` 目录（选择 "不校验合法域名" 便可请求本地 3000 端口）。
 4. 页面入口：主页（地图 Marker 展示小区）→ 选择小区（楼栋热力标记）→ 查看楼栋 → 查看模型说明。
+
+### UI 规范与交互体验
+
+- 地图类页面均提供左下角暗色提示条，明确拖动/点击操作；
+- Marker、标签与卡片风格统一使用 `miniapp/UIDesign.md` 中的色板与圆角规则，浮层使用毛玻璃+渐变按钮，确保视觉一致；
+- 噪音等级的胶囊标签含颜色圆点，点击卡片有轻微上浮与描边，避免“生硬”体验。
 
 ### 常见提示：Taro 全局配置缺失
 

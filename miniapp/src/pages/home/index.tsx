@@ -70,36 +70,38 @@ export default function HomePage() {
     }, 400);
   }
 
-  const markers = useMemo(() =>
-    compounds.map((item) => ({
-      id: item.id,
-      latitude: item.location.lat,
-      longitude: item.location.lng,
-      width: 28,
-      height: 28,
-      iconPath: 'https://mapapi.qq.com/web/lbs/javascriptV2/demo/img/markerDefault.png',
-      label: {
-        content: `${item.name}\n${levelLabel(item.overallNoiseLevel)} ${item.overallNoiseScore}`,
-        color: '#ffffff',
-        fontSize: 12,
-        bgColor: levelColor(item.overallNoiseLevel),
-        padding: 6,
-        borderRadius: 8,
-        textAlign: 'center',
-      },
-      callout: selectedCompoundId === item.id
-        ? {
-            content: `${item.name}\n噪音分：${item.overallNoiseScore}`,
-            color: '#ffffff',
-            bgColor: levelColor(item.overallNoiseLevel),
-            padding: 8,
-            borderRadius: 8,
-            display: 'ALWAYS' as const,
-            textAlign: 'center',
-          }
-        : undefined,
-    })),
-  [compounds, selectedCompoundId]);
+  const markers = useMemo(
+    () =>
+      compounds.map((item) => ({
+        id: item.id,
+        latitude: item.location.lat,
+        longitude: item.location.lng,
+        width: 30,
+        height: 30,
+        iconPath: 'https://mapapi.qq.com/web/lbs/javascriptV2/demo/img/markerDefault.png',
+        label: {
+          content: `${item.name}\n${levelLabel(item.overallNoiseLevel)} ${item.overallNoiseScore}`,
+          color: '#ffffff',
+          fontSize: 12,
+          bgColor: levelColor(item.overallNoiseLevel),
+          padding: 6,
+          borderRadius: 8,
+          textAlign: 'center',
+        },
+        callout: selectedCompoundId === item.id
+          ? {
+              content: `${item.name}\n噪音分：${item.overallNoiseScore}`,
+              color: '#ffffff',
+              bgColor: levelColor(item.overallNoiseLevel),
+              padding: 10,
+              borderRadius: 10,
+              display: 'ALWAYS' as const,
+              textAlign: 'center',
+            }
+          : undefined,
+      })),
+    [compounds, selectedCompoundId]
+  );
 
   const selectedCompound = useMemo(
     () => compounds.find((c) => c.id === selectedCompoundId),
@@ -111,8 +113,11 @@ export default function HomePage() {
 
   return (
     <View className='page'>
-      <View className='header'>
-        <Text className='title'>QuietMap 安静小区雷达</Text>
+      <View className='hero'>
+        <View className='title-wrap'>
+          <Text className='title'>QuietMap 安静小区雷达</Text>
+          <Text className='subtitle'>一眼看懂小区噪音热度，先挑安静的地方看房</Text>
+        </View>
         <Picker
           mode='selector'
           range={pickerRange}
@@ -127,13 +132,29 @@ export default function HomePage() {
           }}
           value={cityIndex === -1 ? 0 : cityIndex}
         >
-          <View className='picker'>当前城市：{cities[cityIndex]?.name || '未选择'}</View>
+          <View className='city-picker'>
+            <Text>当前城市</Text>
+            <Text className='section-sub'>{cities[cityIndex]?.name || '未选择'}</Text>
+          </View>
         </Picker>
       </View>
 
-      <View className='section'>
-        <Text className='section-title'>地图视野加载小区（mock 数据，最多 100 条）</Text>
-        <Text className='section-sub'>拖动/缩放地图后自动刷新，Marker 颜色随噪音等级变化</Text>
+      <View className='section-head'>
+        <View>
+          <Text className='section-title'>地图视野加载小区</Text>
+          <View className='section-sub'>mock 数据，最多 100 条；拖动/缩放自动刷新</View>
+        </View>
+        <View className='legend'>
+          <View className='legend-item'>
+            <View className='legend-dot' style={{ backgroundColor: levelColor('QUIET') }} />安静
+          </View>
+          <View className='legend-item'>
+            <View className='legend-dot' style={{ backgroundColor: levelColor('NORMAL') }} />一般
+          </View>
+          <View className='legend-item'>
+            <View className='legend-dot' style={{ backgroundColor: levelColor('NOISY') }} />嘈杂
+          </View>
+        </View>
       </View>
 
       <View className='map-wrapper'>
@@ -151,6 +172,9 @@ export default function HomePage() {
           />
         )}
         {!mapCenter && <View className='hint'>正在获取城市坐标...</View>}
+        <View className='map-hint'>
+          拖动地图以刷新视野小区，点击标记查看卡片并进入楼栋热力图。
+        </View>
       </View>
 
       <ScrollView scrollY className='list'>
@@ -170,7 +194,17 @@ export default function HomePage() {
               <NoiseLevelTag level={item.overallNoiseLevel} />
             </View>
             <View className='score'>综合分数：{item.overallNoiseScore}</View>
-            <View className='meta'>模型版本：{item.modelMeta.modelVersion}</View>
+            <View className='muted'>模型版本：{item.modelMeta.modelVersion}</View>
+            {item.tags && item.tags.length > 0 && (
+              <View className='tag-row'>
+                {item.tags.map((tag) => (
+                  <View key={tag} className='legend-item'>
+                    <View className='legend-dot' style={{ backgroundColor: '#d1d9f0' }} />
+                    {tag}
+                  </View>
+                ))}
+              </View>
+            )}
           </View>
         ))}
       </ScrollView>
@@ -182,7 +216,7 @@ export default function HomePage() {
             <NoiseLevelTag level={selectedCompound.overallNoiseLevel} />
           </View>
           <View className='score'>综合分数：{selectedCompound.overallNoiseScore}</View>
-          <View className='meta'>模型版本：{selectedCompound.modelMeta.modelVersion}</View>
+          <View className='muted'>数据版本：{selectedCompound.modelMeta.dataVersion}</View>
           <View
             className='btn'
             onClick={() => Taro.navigateTo({ url: `/pages/compound/index?id=${selectedCompound.id}` })}

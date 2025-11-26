@@ -61,8 +61,8 @@ export default function CompoundPage() {
         id: b.id,
         latitude: b.location.lat,
         longitude: b.location.lng,
-        width: 28,
-        height: 28,
+        width: 30,
+        height: 30,
         iconPath: 'https://mapapi.qq.com/web/lbs/javascriptV2/demo/img/markerDefault.png',
         label: {
           content: `${b.name}\n${levelLabel(b.noiseLevelOverall)} ${b.noiseScoreOverall}`,
@@ -78,8 +78,8 @@ export default function CompoundPage() {
               content: `${b.name}\n噪音分：${b.noiseScoreOverall}`,
               color: '#ffffff',
               bgColor: levelColor(b.noiseLevelOverall),
-              padding: 8,
-              borderRadius: 8,
+              padding: 10,
+              borderRadius: 10,
               display: 'ALWAYS' as const,
               textAlign: 'center',
             }
@@ -115,10 +115,13 @@ export default function CompoundPage() {
           </View>
           <View className='meta'>综合分数：{compound.overallNoiseScore}</View>
           <View className='meta'>数据版本：{compound.modelMeta.dataVersion}</View>
+          {compound.tags && compound.tags.length > 0 && (
+            <View className='meta'>标签：{compound.tags.join(' / ')}</View>
+          )}
         </View>
       )}
 
-      <View className='section-title'>楼栋热力视图（可点击标记查看详情）</View>
+      <View className='section-title'>楼栋热力视图</View>
       <View className='map-wrapper'>
         {compound && (
           <Map
@@ -134,6 +137,11 @@ export default function CompoundPage() {
           />
         )}
         {!compound && <View className='hint'>正在加载小区坐标...</View>}
+        <View className='map-hint'>
+          点击楼栋标记查看分数与推荐楼层；当前筛选：
+          {noiseFilter.levels.join(' / ')}
+          {noiseFilter.recommendTopN ? ` · 仅推荐 Top${noiseFilter.recommendTopN}` : ''}
+        </View>
       </View>
 
       <View className='section-title'>楼栋列表</View>

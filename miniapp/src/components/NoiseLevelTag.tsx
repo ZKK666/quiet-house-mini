@@ -8,7 +8,8 @@ type Props = { level: NoiseLevel };
 export default function NoiseLevelTag({ level }: Props) {
   const color = levelColor(level);
   return (
-    <View className='noise-tag' style={{ backgroundColor: `${color}22`, color }}>
+    <View className='noise-tag' style={{ backgroundColor: `${color}15`, color }}>
+      <View className='noise-dot' style={{ backgroundColor: color }} />
       {levelLabel(level)}
     </View>
   );

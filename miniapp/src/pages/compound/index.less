@@ -1,6 +1,116 @@
-@import '../../pages/home/index.less';
+@import '../../styles/theme.less';
+
+.page {
+  min-height: 100vh;
+  padding: @spacing-lg;
+  background: transparent;
+}
+
+.card {
+  padding: @spacing-md;
+  background: @color-card;
+  border-radius: @radius-lg;
+  margin-bottom: @spacing-md;
+  box-shadow: @shadow-card;
+  border: 1px solid transparent;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10rpx;
+}
+
+.name {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: @color-text-title;
+}
+
+.meta {
+  font-size: 26rpx;
+  color: @color-text-body;
+  margin-top: 6rpx;
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: @color-text-title;
+  margin: @spacing-md 0 @spacing-sm;
+}
+
+.map-wrapper {
+  height: 520rpx;
+  margin-bottom: @spacing-lg;
+  border-radius: @radius-lg;
+  overflow: hidden;
+  background: @color-card;
+  box-shadow: @shadow-card;
+  position: relative;
+}
+
+.map {
+  width: 100%;
+  height: 100%;
+}
+
+.list {
+  max-height: calc(100vh - 820rpx);
+  padding-bottom: 120rpx;
+}
+
 .desc {
   margin-top: 10rpx;
-  color: #444;
+  color: @color-text-body;
   font-size: 26rpx;
+}
+
+.hint {
+  text-align: center;
+  color: @color-muted;
+  margin-top: 40rpx;
+}
+
+.map-hint {
+  position: absolute;
+  left: 24rpx;
+  bottom: 24rpx;
+  padding: 14rpx 16rpx;
+  background: rgba(31, 42, 68, 0.78);
+  color: #fff;
+  border-radius: @radius-md;
+  font-size: 24rpx;
+  line-height: 1.4;
+  max-width: 78%;
+}
+
+.floating-card {
+  position: fixed;
+  left: @spacing-lg;
+  right: @spacing-lg;
+  bottom: @spacing-lg;
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: @radius-lg;
+  box-shadow: 0 14rpx 32rpx rgba(0, 0, 0, 0.14);
+  padding: @spacing-md;
+  backdrop-filter: blur(12rpx);
+}
+
+.floating-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12rpx;
+}
+
+.btn {
+  margin-top: 14rpx;
+  background: linear-gradient(120deg, #4c6fff, #6f8dff);
+  color: #fff;
+  text-align: center;
+  padding: 16rpx;
+  border-radius: @radius-md;
+  font-weight: 700;
 }
