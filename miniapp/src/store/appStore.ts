@@ -15,7 +15,7 @@ type AppState = {
 
 export const useAppStore = create<AppState>((set) => ({
   currentCityId: undefined,
-  noiseFilter: { levels: ['QUIET', 'NORMAL'] },
+  noiseFilter: { levels: ['QUIET', 'NORMAL', 'NOISY'] },
   setCityId: (id) => set({ currentCityId: id }),
   setNoiseFilter: (payload) =>
     set((state) => ({ noiseFilter: { ...state.noiseFilter, ...payload } }))

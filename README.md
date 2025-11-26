@@ -54,8 +54,8 @@ npm test
 仓库新增 `miniapp/` 目录，提供静态页面骨架直连本项目 Mock API，方便在微信开发者工具里快速预览。
 
 ### 目录概览
-- `miniapp/src/pages/home`：城市选择 + 小区列表（支持从后端拉取最多 100 条 mock 数据）。
-- `miniapp/src/pages/compound`：小区详情与楼栋列表。
+- `miniapp/src/pages/home`：城市选择 + 地图视野加载小区（Marker 颜色随噪音等级变化，可点击查看卡片与跳转）。
+- `miniapp/src/pages/compound`：小区地图热力点 + 楼栋列表（支持等级筛选、点击 Marker 弹出卡片）。
 - `miniapp/src/pages/building-detail`：楼栋综合分与楼层噪音、影响因素。
 - `miniapp/src/pages/about-model`：噪音模型说明静态页。
 - `miniapp/src/services`：封装请求与接口调用。
@@ -65,9 +65,7 @@ npm test
 1. 在本仓库根目录启动 Mock 后端：`npm install && npm run start`。
 2. 进入 `miniapp`：`cd miniapp && npm install`（首次安装 Taro 依赖可能较慢）。
 3. 启动微信端编译：`npm run dev:weapp`，或直接用微信开发者工具打开 `miniapp` 目录（选择 "不校验合法域名" 便可请求本地 3000 端口）。
-4. 页面入口：主页 → 选择小区 → 查看楼栋 → 查看模型说明。
-
-> 说明：页面使用微信原生 `<Map>` 以外的基础组件，优先保证数据串通与文案验收；如需地图热力图，可在现有骨架上替换为地图组件即可。
+4. 页面入口：主页（地图 Marker 展示小区）→ 选择小区（楼栋热力标记）→ 查看楼栋 → 查看模型说明。
 
 ### 常见提示：Taro 全局配置缺失
 
