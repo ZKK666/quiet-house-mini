@@ -48,3 +48,23 @@ npm test
 1. 扩展数据生成脚本（scripts/）以批量随机更多城市/小区/楼栋。
 2. 抽出共享类型包，方便小程序端直接复用类型定义。
 3. 控制器增加覆盖率，后续补充 E2E 冒烟测试。
+
+## 微信小程序端（Taro3 + React + TS）
+
+仓库新增 `miniapp/` 目录，提供静态页面骨架直连本项目 Mock API，方便在微信开发者工具里快速预览。
+
+### 目录概览
+- `miniapp/src/pages/home`：城市选择 + 小区列表（支持从后端拉取最多 100 条 mock 数据）。
+- `miniapp/src/pages/compound`：小区详情与楼栋列表。
+- `miniapp/src/pages/building-detail`：楼栋综合分与楼层噪音、影响因素。
+- `miniapp/src/pages/about-model`：噪音模型说明静态页。
+- `miniapp/src/services`：封装请求与接口调用。
+- `miniapp/src/store`：Zustand 状态（城市与筛选偏好）。
+
+### 本地运行（推荐微信开发者工具）
+1. 在本仓库根目录启动 Mock 后端：`npm install && npm run start`。
+2. 进入 `miniapp`：`cd miniapp && npm install`（首次安装 Taro 依赖可能较慢）。
+3. 启动微信端编译：`npm run dev:weapp`，或直接用微信开发者工具打开 `miniapp` 目录（选择 "不校验合法域名" 便可请求本地 3000 端口）。
+4. 页面入口：主页 → 选择小区 → 查看楼栋 → 查看模型说明。
+
+> 说明：页面使用微信原生 `<Map>` 以外的基础组件，优先保证数据串通与文案验收；如需地图热力图，可在现有骨架上替换为地图组件即可。

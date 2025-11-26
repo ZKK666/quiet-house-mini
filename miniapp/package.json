@@ -1,0 +1,30 @@
+{
+  "name": "quiet-house-miniapp",
+  "version": "0.1.0",
+  "private": true,
+  "description": "QuietMap 微信小程序端（Taro3 + React + TS）",
+  "scripts": {
+    "dev:weapp": "taro build --type weapp --watch",
+    "build:weapp": "taro build --type weapp",
+    "lint": "eslint --ext .ts,.tsx src",
+    "prettier": "prettier --write src"
+  },
+  "dependencies": {
+    "@tarojs/components": "^3.6.26",
+    "@tarojs/react": "^3.6.26",
+    "@tarojs/runtime": "^3.6.26",
+    "@tarojs/taro": "^3.6.26",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "zustand": "^4.5.4"
+  },
+  "devDependencies": {
+    "@tarojs/cli": "^3.6.26",
+    "@types/react": "^18.3.11",
+    "@types/node": "^22.13.1",
+    "eslint": "^9.15.0",
+    "eslint-config-taro": "^3.6.26",
+    "typescript": "^5.7.3",
+    "prettier": "^3.3.3"
+  }
+}
