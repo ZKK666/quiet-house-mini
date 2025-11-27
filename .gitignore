@@ -137,3 +137,8 @@ dist
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# Miniapp lockfile kept out due to binary restrictions
+miniapp/package-lock.json
+# Root lockfile也不纳入仓库，避免受限环境误判为二进制文件
+package-lock.json
